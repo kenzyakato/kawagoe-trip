@@ -25,7 +25,6 @@
   }
   header h1{ margin:0; font-size:20px; letter-spacing:.5px; }
   header .sub{ font-size:12.5px; opacity:.92; margin-top:2px; }
-  /* quick jump chips */
   .chips{ display:flex; gap:8px; margin-top:12px; overflow-x:auto; padding-bottom:2px; }
   .chips a{
     flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.18);
@@ -36,14 +35,37 @@
 
   /* collapsible info */
   details{ background:var(--card); margin:12px 14px 0; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
-  summary{ list-style:none; cursor:pointer; padding:12px 14px; font-weight:700; font-size:14.5px; color:var(--red); display:flex; align-items:center; gap:8px; }
+  summary{ list-style:none; cursor:pointer; padding:13px 14px; font-weight:700; font-size:15px; color:var(--red); display:flex; align-items:center; gap:8px; }
   summary::-webkit-details-marker{ display:none; }
   summary::after{ content:"▾"; margin-left:auto; transition:transform .2s; color:#bbb; }
   details[open] summary::after{ transform:rotate(180deg); }
   .dbody{ padding:0 14px 14px; font-size:13.5px; }
   .dbody b{ color:var(--red); }
-  .dbody .row{ margin:4px 0; }
-  .flow{ font-size:13px; color:#555; }
+  .dbody .blk{ padding:10px 0; border-top:1px dashed #ece0d0; }
+  .dbody .blk:first-child{ border-top:0; padding-top:2px; }
+  .dbody h4{ margin:0 0 5px; font-size:14px; color:var(--ink); }
+  .dbody h4 .pill{ font-size:10.5px; font-weight:700; color:#fff; background:var(--red); border-radius:10px; padding:1px 8px; margin-left:6px; vertical-align:middle; }
+  .dbody h4 .pill.alt{ background:#6b7b8c; }
+  .dbody ul{ margin:5px 0 0; padding-left:18px; }
+  .dbody li{ margin-bottom:4px; }
+  .dbody .note{ background:#faf4ea; border:1px solid #ecdcc2; border-radius:8px; padding:8px 10px; margin-top:10px; font-size:12.5px; }
+
+  /* transit flow */
+  .flow{ list-style:none; margin:4px 0 0; padding:0; }
+  .flow li{ position:relative; padding:0 0 10px 22px; font-size:13.5px; }
+  .flow li::before{ content:""; position:absolute; left:4px; top:6px; width:9px; height:9px; background:var(--red); border-radius:50%; }
+  .flow li::after{ content:""; position:absolute; left:8px; top:15px; bottom:0; width:2px; background:#e3c9bf; }
+  .flow li:last-child{ padding-bottom:0; }
+  .flow li:last-child::after{ display:none; }
+  .flow .stn{ font-weight:700; }
+  .flow .seg{ color:#7a7a7a; font-size:12px; }
+  .flow .buy{ color:var(--red); font-weight:700; }
+
+  /* timeline table */
+  table.tl{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  table.tl td{ padding:6px 8px; border-bottom:1px solid #efe6d8; vertical-align:top; }
+  table.tl tr:last-child td{ border-bottom:0; }
+  table.tl td.t{ white-space:nowrap; font-weight:700; color:#666; width:62px; }
 
   /* spot cards */
   .card{
@@ -62,7 +84,8 @@
   .meta{ padding:0 14px 12px; font-size:13.5px; color:#444; }
   .meta .tip{ margin:0 0 8px; }
   .meta .kv{ display:flex; gap:6px; margin:3px 0; }
-  .meta .kv .k{ color:var(--red); font-weight:700; flex:0 0 auto; }
+  .meta .kv .k{ color:var(--red); font-weight:700; flex:0 0 auto; min-width:34px; }
+
   /* nav button */
   .nav{
     display:flex; align-items:center; justify-content:center; gap:8px;
@@ -72,14 +95,14 @@
   }
   .nav:active{ transform:scale(.99); background:#9c3526; }
   .nav .ico{ font-size:18px; }
-  .subnav{ display:flex; flex-direction:column; gap:8px; margin:0 14px 14px; }
-  .subnav a{
-    display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:46px;
-    border-radius:10px; background:#fff5f1; color:var(--red); text-decoration:none; font-weight:600;
-    font-size:14px; border:1px solid #f0c4b6; padding:0 14px;
-  }
-  .subnav a:active{ background:#fde7df; }
-  .subnav .go{ font-size:13px; opacity:.8; }
+
+  /* handcraft sub-items */
+  .subitem{ padding:12px 14px; border-top:1px solid #f0e7d9; }
+  .subitem h3{ margin:0 0 4px; font-size:15px; }
+  .subitem p{ margin:0 0 6px; font-size:13px; color:#555; }
+  .subitem .kv{ display:flex; gap:6px; margin:2px 0; font-size:12.5px; }
+  .subitem .kv .k{ color:var(--red); font-weight:700; min-width:34px; }
+  .subitem .nav{ margin:10px 0 2px; min-height:46px; font-size:15px; }
 
   footer{ text-align:center; color:#aaa; font-size:11px; margin-top:22px; padding:0 20px; }
   .hint{ font-size:11.5px; color:#8a8a8a; text-align:center; margin:14px 16px 0; }
@@ -101,18 +124,64 @@
   <details>
     <summary>🎫 票 & 买法（2 人 · 中国护照）</summary>
     <div class="dbody">
-      <div class="row"><b>选 KAWAGOE DISCOUNT PASS Premium</b>，每人 ¥1,200（两人 ¥2,400）。</div>
-      <div class="row">外国人均可购买（在住者也行），<b>购买带护照</b>；建议在<b>池袋站窗口</b>当面买。</div>
-      <div class="row">已含 川越巴士全天，无需另买巴士券。东林間→池袋 段另刷 IC。</div>
+      <div class="blk">
+        <h4>方案 B · KAWAGOE DISCOUNT PASS Premium<span class="pill">推荐</span></h4>
+        <div><b>每人 ¥1,200</b>（儿童 ¥600）→ 两人 <b>¥2,400</b>。</div>
+        <ul>
+          <li><b>谁能买</b>:外国人均可（在住者也行）。你（在日工作）和你妈（旅游）都能买。</li>
+          <li><b>怎么买</b>:购买<b>带护照</b>;建议在<b>池袋站窗口</b>当面买，或 Klook / TJJT 线上买。</li>
+          <li><b>含</b>:池袋↔川越往返 + 川越巴士全天（含小江户巡回巴士）+ 约 10 家店折扣 + 池袋东武百货 7% off 券。</li>
+        </ul>
+      </div>
+      <div class="blk">
+        <h4>方案 A · 川越れとろトリップきっぷ<span class="pill alt">备选 · 全程手机</span></h4>
+        <div>池袋发：交通+玩乐券 ¥1,600 ／ 交通+吃饭券 ¥2,400 ／ 全套 ¥2,900。</div>
+        <ul>
+          <li><b>谁能买</b>:所有人，不限国籍;手机买、出示画面，免排队。</li>
+          <li><b>含</b>:往返 + 川越巴士 + 可消费的「甜点 / 吃饭」抵用券。</li>
+        </ul>
+      </div>
+      <div class="note">两张都只含 <b>池袋↔川越</b>;东林間→池袋 段另刷 IC（单程约 ¥570）。两张都已含川越巴士，<b>不用再买 ¥500 巡回巴士券</b>。</div>
     </div>
   </details>
 
   <!-- 交通 -->
   <details>
-    <summary>🚆 交通（东林間 ⇄ 川越 · 约 2 小时）</summary>
-    <div class="dbody flow">
-      东林間 →〔小田急〕相模大野 →〔快速急行〕新宿 →〔JR〕池袋（买票）→〔东武东上线 急行〕川越。<br>
-      返程原路返回。
+    <summary>🚆 交通路线（东林間 ⇄ 川越 · 约 2 小时）</summary>
+    <div class="dbody">
+      <ul class="flow">
+        <li><span class="stn">东林間</span> <span class="seg">— 小田急江ノ島線 →</span></li>
+        <li><span class="stn">相模大野</span> <span class="seg">换乘 · 小田急 快速急行（约 38 分）→</span></li>
+        <li><span class="stn">新宿</span> <span class="seg">换乘 · JR 埼京線 / 湘南新宿ライン（约 8 分）→</span></li>
+        <li><span class="stn">池袋</span> <span class="buy">★ 买票 / 换票</span> <span class="seg">· 东武东上线 急行（约 30 分）→</span></li>
+        <li><span class="stn">川越</span></li>
+      </ul>
+      <div class="note">返程原路返回:川越 → 池袋 → 新宿 → 相模大野 → 东林間。东林間↔池袋段往返约 <b>¥1,140</b>（不含 pass）。</div>
+    </div>
+  </details>
+
+  <!-- 时间表 -->
+  <details>
+    <summary>⏱ 当天时间表</summary>
+    <div class="dbody">
+      <table class="tl">
+        <tr><td class="t">07:30</td><td>东林間 出发</td></tr>
+        <tr><td class="t">~07:35</td><td>相模大野 换乘 快速急行</td></tr>
+        <tr><td class="t">~08:20</td><td>新宿 换乘 JR</td></tr>
+        <tr><td class="t">~08:40</td><td>抵 <b>池袋</b> → 在此买 / 换票</td></tr>
+        <tr><td class="t">09:00</td><td>池袋 上 东武东上线 急行</td></tr>
+        <tr><td class="t">~09:30</td><td>抵 <b>川越站</b>，坐小江户巡回巴士</td></tr>
+        <tr><td class="t">10:00</td><td>① 冰川神社（人形流、抽签）~45min</td></tr>
+        <tr><td class="t">10:50</td><td>② 时之钟 &amp; 百年星巴克 ~30min</td></tr>
+        <tr><td class="t">11:30</td><td>午餐（鳗鱼 / 小吃）~60min</td></tr>
+        <tr><td class="t">12:30</td><td>③ 手工体验（选 1–2 项）~60–90min</td></tr>
+        <tr><td class="t">14:00</td><td>④ 隐秘干花咖啡 ~45min</td></tr>
+        <tr><td class="t">15:00</td><td>⑤ 果子屋横丁 + 蔵造老街扫货 ~90min</td></tr>
+        <tr><td class="t">17:00</td><td>晚餐（寿司 / 鳗鱼）</td></tr>
+        <tr><td class="t">18:00</td><td>川越站 返程</td></tr>
+        <tr><td class="t">~20:00</td><td>回到 东林間</td></tr>
+      </table>
+      <div class="note">体验类店铺多 <b>16:30 关门</b>，手工 / 咖啡尽量排在下午 4 点前。</div>
     </div>
   </details>
 
@@ -120,10 +189,10 @@
   <section class="card" id="s1">
     <div class="top">
       <div class="num">1</div>
-      <div class="ttl"><h2>冰川神社</h2><div class="jp">川越氷川神社</div></div>
+      <div class="ttl"><h2>冰川神社 <span class="kid">亲子</span></h2><div class="jp">川越氷川神社</div></div>
     </div>
     <div class="meta">
-      <p class="tip">入口取「小纸人」，念语后放入小溪漂流（人形流）；可抽鲤鱼造型粉签。</p>
+      <p class="tip">入口取「小纸人」，按指示念语后放入小溪漂流（人形流）；可抽鲤鱼造型粉签或整体运红签。离一番街较远，建议坐小江户巡回巴士。</p>
       <div class="kv"><span class="k">营业</span><span>8:00–16:30</span></div>
       <div class="kv"><span class="k">地址</span><span>埼玉県川越市宮下町 2-11-3</span></div>
     </div>
@@ -137,9 +206,9 @@
       <div class="ttl"><h2>时之钟 &amp; 星巴克</h2><div class="jp">時の鐘 / スターバックス 鐘つき通り店</div></div>
     </div>
     <div class="meta">
-      <p class="tip">400 年历史钟楼；隔壁百年老屋改建的星巴克打卡。</p>
-      <div class="kv"><span class="k">营业</span><span>钟楼景观 ／ 星巴克 8:00–20:00</span></div>
-      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 15-7 一带</span></div>
+      <p class="tip">听 400 年历史的钟声（每天 6/12/15/18 时鸣钟）；隔壁百年老屋改建的星巴克，川越限定氛围打卡。</p>
+      <div class="kv"><span class="k">营业</span><span>钟楼景观全天 ／ 星巴克 8:00–20:00</span></div>
+      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 15-7 一带（星巴克 幸町 15-18）</span></div>
     </div>
     <a class="nav" data-q="時の鐘 川越"><span class="ico">🧭</span>导航到这里</a>
   </section>
@@ -148,15 +217,30 @@
   <section class="card" id="s3">
     <div class="top">
       <div class="num">3</div>
-      <div class="ttl"><h2>手工体验 <span class="kid">达摩 亲子</span></h2><div class="jp">筷子 / 戒指 / 达摩（任选 1–2）</div></div>
+      <div class="ttl"><h2>手工体验 <span class="kid">达摩 亲子</span></h2><div class="jp">筷子 / 戒指 / 达摩（任选 1–2，各约 30 分钟）</div></div>
     </div>
-    <div class="meta">
-      <p class="tip">三家任选，各约 30 分钟。下面分别导航：</p>
+
+    <div class="subitem">
+      <h3>🥢 筷子 · 唐木木工</h3>
+      <p>从 16 种木材选料，自己打磨上油，约 30 分钟完成，可带走。</p>
+      <div class="kv"><span class="k">营业</span><span>平日 12:30–17:00 ／ 周末 10:30–17:00</span></div>
+      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 14-3</span></div>
+      <a class="nav" data-q="埼玉県川越市幸町14-3"><span class="ico">🧭</span>导航 · 筷子体验</a>
     </div>
-    <div class="subnav">
-      <a data-q="埼玉県川越市幸町14-3">🥢 筷子 · 唐木木工（幸町14-3）<span class="go">导航 ›</span></a>
-      <a data-q="Glänta 川越">💍 戒指 · Glänta（幸町6-9）<span class="go">导航 ›</span></a>
-      <a data-q="椿の蔵 川越">🎎 达摩 · 椿の蔵（幸町3-2）<span class="go">导航 ›</span></a>
+
+    <div class="subitem">
+      <h3>💍 戒指 · Glänta</h3>
+      <p>DIY 银饰戒指，约 30 分钟，价格亲民，适合情侣 / 母女。</p>
+      <div class="kv"><span class="k">营业</span><span>10:00–18:00</span></div>
+      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 6-9 1F</span></div>
+      <a class="nav" data-q="Glänta 川越"><span class="ico">🧭</span>导航 · Glänta</a>
+    </div>
+
+    <div class="subitem">
+      <h3>🎎 达摩 · 椿の蔵 <span class="kid">亲子</span></h3>
+      <p>设计非主流达摩，搭配珍珠丝带，做个独一无二的小摆件。</p>
+      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 3-2</span></div>
+      <a class="nav" data-q="椿の蔵 川越"><span class="ico">🧭</span>导航 · 椿の蔵</a>
     </div>
   </section>
 
@@ -167,8 +251,8 @@
       <div class="ttl"><h2>隐秘干花咖啡</h2><div class="jp">幸町5-24 · 公文式川越幸町教室 对面</div></div>
     </div>
     <div class="meta">
-      <p class="tip">地图上难找的倒挂干花店，拍照像杂志大片。建议下午去。</p>
-      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 5-24</span></div>
+      <p class="tip">地图上难找的倒挂干花店，满墙干花，拍照像杂志大片。光线好，建议下午前往（具体视当日营业）。</p>
+      <div class="kv"><span class="k">地址</span><span>埼玉県川越市幸町 5-24（公文式川越幸町教室 对面）</span></div>
     </div>
     <a class="nav" data-q="埼玉県川越市幸町5-24"><span class="ico">🧭</span>导航到这里</a>
   </section>
@@ -180,8 +264,8 @@
       <div class="ttl"><h2>果子屋横丁 &amp; 晚餐 <span class="kid">糖果街 亲子</span></h2><div class="jp">菓子屋横丁</div></div>
     </div>
     <div class="meta">
-      <p class="tip">怀旧糖果小吃街、买限定周边；晚餐吃寿司或川越名物鳗鱼。</p>
-      <div class="kv"><span class="k">营业</span><span>店铺多至 17:00</span></div>
+      <p class="tip">怀旧糖果小吃街，石板路 + 老铺，买限定周边和零食；逛完顺路在蔵造老街扫货。晚餐吃寿司或川越名物鳗鱼。</p>
+      <div class="kv"><span class="k">营业</span><span>街区全天开放，店铺多至 17:00</span></div>
       <div class="kv"><span class="k">地址</span><span>埼玉県川越市元町 2 丁目</span></div>
     </div>
     <a class="nav" data-q="菓子屋横丁 川越"><span class="ico">🧭</span>导航到这里</a>
@@ -197,13 +281,25 @@
     <a class="nav" data-q="川越駅"><span class="ico">🧭</span>导航回川越站</a>
   </section>
 
-  <p class="hint">导航默认步行；上车后可在谷歌地图里切换「公交」。冰川神社离一番街较远，建议坐小江户巡回巴士。</p>
+  <!-- 贴士 -->
+  <details>
+    <summary>💡 出行贴士</summary>
+    <div class="dbody">
+      <ul style="margin:0;padding-left:18px;">
+        <li><b>出发时间</b>:建议 9 点前到川越，16 点前结束体验项目（多数店 16:30 关门）。</li>
+        <li><b>市内交通</b>:小江户巡回巴士贯穿所有景点;持上面的 pass 已含巴士，无需另买。导航默认步行，上车后可在谷歌地图里切「公交」。</li>
+        <li><b>季节提醒</b>:冰川神社出名的「风铃隧道」是夏季缘结风铃祭（约 7 月起）才挂，<b>5 月底去大概率还没上</b>;但花手水、签条墙一年四季可拍。</li>
+        <li><b>吃</b>:川越名物是鳗鱼（うなぎ）和红薯（さつまいも）制品;想喝有当地 COEDO 精酿啤酒。</li>
+      </ul>
+    </div>
+  </details>
+
+  <p class="hint">导航默认步行;远的点（如冰川神社）建议坐小江户巡回巴士。</p>
   <footer>川越一日游 · 仅供个人出行参考</footer>
 
 </div>
 
 <script>
-  // build Google Maps directions links (works as deep-link to the app on phones)
   document.querySelectorAll('[data-q]').forEach(function(a){
     var q = encodeURIComponent(a.getAttribute('data-q'));
     a.href = 'https://www.google.com/maps/dir/?api=1&destination=' + q + '&travelmode=walking';
